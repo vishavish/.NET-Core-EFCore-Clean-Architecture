@@ -1,7 +1,6 @@
 using DeviceAssigment.Application;
 using DeviceAssignment.Api.Filters;
 using DeviceAssignment.Infrastracture;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,8 +25,8 @@ namespace DeviceAssignment.Api
             services.AddInfrastructure(Configuration);
 
             services.AddControllers(opt =>
-                opt.Filters.Add(new ValidationFilter()))
-                    .AddFluentValidation();
+                opt.Filters.Add(new ValidationFilter()));
+                    //.AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
