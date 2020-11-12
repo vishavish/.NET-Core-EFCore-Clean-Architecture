@@ -35,11 +35,11 @@ namespace DeviceAssignment.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDevice([FromBody] CreateDeviceDto createDeviceDto, CancellationToken cancellationToken)
         {
-            CreateDeviceValidator validator = new CreateDeviceValidator();
-            FluentValidation.Results.ValidationResult result = validator.Validate(createDeviceDto);
+            //CreateDeviceValidator validator = new CreateDeviceValidator();
+            //FluentValidation.Results.ValidationResult result = validator.Validate(createDeviceDto);
 
-            if (!result.IsValid)
-                return BadRequest(result.Errors); // bad way of validation; have to use actionfilters
+            //if (!result.IsValid)
+            //    return BadRequest(result.Errors); // bad way of validation; have to use actionfilters
 
             _deviceRepo.Add(createDeviceDto);
             if (!await _deviceRepo.Save(cancellationToken))
