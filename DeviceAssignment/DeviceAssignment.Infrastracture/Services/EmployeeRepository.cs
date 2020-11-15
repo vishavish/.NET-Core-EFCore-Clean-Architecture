@@ -8,6 +8,7 @@ using DeviceAssigment.Application.Employee.Interfaces;
 using DeviceAssignment.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DeviceAssignment.Infrastracture.Services
@@ -54,6 +55,11 @@ namespace DeviceAssignment.Infrastracture.Services
             };
         }
 
+        public async Task<bool> Save(CancellationToken token)
+        {
+            return (await _context.SaveChangesAsync(token) > 0);
+        }
+
         public void Add(CreateEmployeeDto newEmployee)
         {
             var employeeObj = _mapper.Map<Employee>(newEmployee);
@@ -66,9 +72,9 @@ namespace DeviceAssignment.Infrastracture.Services
             _context.Employees.Update(employeeObj);
         }
 
-        public void Remove(EmployeeDto employeeDto)
+        public void Remove(int id)
         {
-            var employeeObj = _mapper.Map<Employee>(employeeDto);
+            var employeeObj = _context.Employees.Find(id);
             _context.Employees.Remove(employeeObj);
         }
     }
