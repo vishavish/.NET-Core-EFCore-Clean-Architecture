@@ -25,7 +25,7 @@ namespace DeviceAssignment.Api.Controllers
             return await _deviceRepo.GetDevices();
         }
 
-        [HttpGet("get/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<DeviceDto>>> GetDevice(int id)
         {
             return await _deviceRepo.GetDevice(id);
@@ -41,6 +41,34 @@ namespace DeviceAssignment.Api.Controllers
             }
 
             return Ok(createDeviceDto);
+        }
+
+        [HttpPut("edit/{id")]
+        public async Task<IActionResult> EditDevice(int id, [FromBody] DeviceDto deviceDto, CancellationToken cancellationToken)
+        {
+            if (id != deviceDto.Id)
+            {
+                return BadRequest();
+            }
+
+            _deviceRepo.Update(deviceDto);
+            if (!await _deviceRepo.Save(cancellationToken))
+            {
+                return BadRequest();
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> RemoveDevice(int id, CancellationToken cancellationToken)
+        {
+            _deviceRepo.Remove(id);
+            if (!await _deviceRepo.Save(cancellationToken))
+            {
+                return BadRequest();
+            }
+
+            return NoContent();
         }
     }
 }

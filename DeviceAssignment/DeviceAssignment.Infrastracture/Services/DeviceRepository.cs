@@ -72,10 +72,15 @@ namespace DeviceAssignment.Infrastracture.Services
             _context.Devices.Add(deviceObj);
         }
 
-        public void Remove(DeviceDto deviceDto)
+        public void Remove(int id)
         {
-            var deviceObj = _mapper.Map<Device>(deviceDto);
-            _context.Devices.Add(deviceObj);
+            var device = _context.Devices.Find(id);
+            if (device == null)
+            {
+                throw new NotFoundException(nameof(Device), id);
+            }
+
+            _context.Devices.Remove(device);
         }
     }
 }

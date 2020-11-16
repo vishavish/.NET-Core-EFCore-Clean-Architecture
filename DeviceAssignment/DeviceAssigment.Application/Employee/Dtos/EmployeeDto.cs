@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using DeviceAssigment.Application.Device.Dtos;
-using DeviceAssignment.Domain.Entities;
 
 namespace DeviceAssigment.Application.Employee.Dtos
 {

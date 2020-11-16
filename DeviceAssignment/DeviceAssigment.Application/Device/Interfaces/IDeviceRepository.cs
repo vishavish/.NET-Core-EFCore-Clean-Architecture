@@ -13,6 +13,6 @@ namespace DeviceAssigment.Application.Device.Interfaces
         Task<bool> Save(CancellationToken cancellationToken);
         void Add(CreateDeviceDto newDevice);
         void Update(DeviceDto deviceDto);
-        void Remove(DeviceDto deviceDto);
+        void Remove(int id);
     }
 }
