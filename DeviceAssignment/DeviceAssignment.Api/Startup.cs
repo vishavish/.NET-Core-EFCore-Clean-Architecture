@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace DeviceAssignment.Api
 {
@@ -25,6 +26,17 @@ namespace DeviceAssignment.Api
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
+            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Device API",
+                    Description = "Sample implementation of Swagger UI"
+                });
+            });
+
             services.AddControllers(opt =>
                 opt.Filters.Add(typeof(ValidationFilter)))
                     .AddFluentValidation();
@@ -37,6 +49,12 @@ namespace DeviceAssignment.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => 
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample Swagger API");
+            });
 
             app.UseHttpsRedirection();
 

@@ -43,7 +43,7 @@ namespace DeviceAssignment.Api.Controllers
             return Ok(createDeviceDto);
         }
 
-        [HttpPut("edit/{id")]
+        [HttpPut("edit/{id}")]
         public async Task<IActionResult> EditDevice(int id, [FromBody] DeviceDto deviceDto, CancellationToken cancellationToken)
         {
             if (id != deviceDto.Id)
