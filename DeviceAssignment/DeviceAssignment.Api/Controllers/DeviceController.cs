@@ -32,7 +32,7 @@ namespace DeviceAssignment.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDevice([FromBody] CreateDeviceDto createDeviceDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> AddDevice([FromBody] CreateDeviceDto createDeviceDto, CancellationToken cancellationToken)
         {
             _deviceRepo.Add(createDeviceDto);
             if (!await _deviceRepo.Save(cancellationToken))
@@ -44,7 +44,7 @@ namespace DeviceAssignment.Api.Controllers
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<IActionResult> EditDevice(int id, [FromBody] DeviceDto deviceDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateDevice(int id, [FromBody] DeviceDto deviceDto, CancellationToken cancellationToken)
         {
             if (id != deviceDto.Id)
             {
