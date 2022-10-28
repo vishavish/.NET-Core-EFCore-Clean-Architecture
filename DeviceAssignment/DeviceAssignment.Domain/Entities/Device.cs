@@ -10,6 +10,6 @@ namespace DeviceAssignment.Domain.Entities
         public string Description { get; set; }
         public Condition Condition { get; set; }
         public Employee Employee { get; set; }
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
     }
 }
