@@ -18,7 +18,7 @@ namespace DeviceAssigment.Application.Common.Validators
 
             RuleFor(m => m.MobileNo)
                 .NotEmpty().WithMessage("Mobile No. is required.")
-                .Matches("^$[0-9]*").WithMessage("Invalid Mobile No.");
+                .Matches("^[0-9]*$").WithMessage("Invalid Mobile No.");
     
             RuleFor(e => e.EmploymentDate)
                 .NotEmpty().WithMessage("Employment Date is required.");

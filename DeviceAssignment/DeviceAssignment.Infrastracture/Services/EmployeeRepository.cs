@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using DeviceAssigment.Application.Common.Exceptions;
 using DeviceAssigment.Application.Common.Interfaces;
 using DeviceAssigment.Application.Common.Models;
+using DeviceAssigment.Application.Device.Interfaces;
 using DeviceAssigment.Application.Employee.Dtos;
 using DeviceAssigment.Application.Employee.Interfaces;
 using DeviceAssignment.Domain.Entities;
@@ -41,7 +42,9 @@ namespace DeviceAssignment.Infrastracture.Services
 
         public async Task<ServiceResponse<EmployeeDto>> GetEmployee(int id)
         {
-            var employeeObj = await _context.Employees.FindAsync(id);
+            var employeeObj = await _context.Employees
+                                        .Include(e => e.Devices)
+                                        .FirstOrDefaultAsync(e => e.Id == id);
             if (employeeObj == null) 
                 throw new NotFoundException(nameof(Employee), id);
 
